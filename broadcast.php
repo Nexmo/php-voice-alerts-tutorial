@@ -1,19 +1,17 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
+require 'config.php';
 
-$basic  = new \Nexmo\Client\Credentials\Basic('API_KEY', 'API_SECRET');
+$basic  = new \Nexmo\Client\Credentials\Basic($config['api_key'], $config['api_secret']);
 $keypair = new \Nexmo\Client\Credentials\Keypair(
     file_get_contents(__DIR__ . '/private.key'),
-    '5555f9df-05bb-4a99-9427-6e43c83849b8'
+    $config['application_id']
 );
 
 $client = new \Nexmo\Client(new \Nexmo\Client\Credentials\Container($basic, $keypair));
 
-$contacts = [
-    "Bob Smith" => 14155550200,
-    "Jenny Cable" => 14155550355
-];
+$contacts = $config['contacts'];
 
 foreach ($contacts as $name => $number) {
     $client->calls()->create([
@@ -23,10 +21,10 @@ foreach ($contacts as $name => $number) {
         ]],
         'from' => [
             'type' => 'phone',
-            'number' => '14155550100'
+            'number' => $config['from_number']
         ],
-        'answer_url' => ['https://example.com/answer.php'],
-        'event_url' => ['https://example.com/event.php'],
+        'answer_url' => [$config['base_url'] . '/answer.php'],
+        'event_url' => [$config['base_url'] . '/event.php'],
         'machine_detection' => 'continue'
     ]);
 
