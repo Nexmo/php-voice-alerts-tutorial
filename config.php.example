@@ -1,0 +1,19 @@
+<?php
+
+// You can find your API key and secret at https://dashboard.nexmo.com
+$config['api_key'] = 
+$config['api_secret'] = 
+
+// The ID of the application you created
+$config['application_id'] = 
+
+// The number to call from
+$config['from_number'] = 
+
+// Where the application is running
+$config['base_url'] = 
+
+// An array of "name" => "valid phone number" entries
+$config['contacts'] = [
+  ]
+

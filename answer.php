@@ -1,17 +1,13 @@
 <?php
 
-// The incoming request could be a GET or a POST, depending on how your
-// account is configured
-$request = array_merge($_GET, $_POST);
-
 // This is the phone number being called
-$to = $request['to'];
+$to = $_REQUEST['to'];
 
 // This is the caller's phone number
-$from = $request['from'];
+$from = $_REQUEST['from'];
 
 // Nexmo provide a unique ID for all calls
-$uuid = $request['conversation_uuid'];
+$uuid = $_REQUEST['conversation_uuid'];
 
 // For more advanced Conversations you use the above parameters to
 // dynamically create the NCCO and provide a personalised experience
